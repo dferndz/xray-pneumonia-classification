@@ -28,7 +28,6 @@ def evaluate():
 
 
 if __name__ == "__main__":
-    import os
     accuracy = evaluate()
     print(f"accuracy: {accuracy}")
     
