@@ -1,5 +1,4 @@
 import torch
-import argparse
 from torchvision import transforms
 from tqdm.auto import tqdm
 import torch.utils.tensorboard as tb
