@@ -146,3 +146,6 @@ archive.*
 .logs
 log
 logs
+
+# trainned model
+*.pth
