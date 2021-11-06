@@ -1,5 +1,4 @@
-from torch.functional import block_diag
-from torch.serialization import load
+import torch
 from torch.utils.data import Dataset, DataLoader
 from torchvision import transforms
 import matplotlib.pyplot as plt
@@ -17,9 +16,9 @@ class XRayDataset(Dataset):
     transform = transforms.Compose([
         transforms.Resize(128),
         transforms.CenterCrop(128),
-        transforms.RandomHorizontalFlip(),
-        transforms.Grayscale(),
+        transforms.Grayscale(3),
         transforms.ToTensor(),
+        #transforms.ColorJitter(0.9, 0.8, 0.2)
     ])
 
     exclude = [

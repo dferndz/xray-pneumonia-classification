@@ -9,13 +9,17 @@ MODEL_STATE_PATH = "classifier.pth"
 class Classifier(torch.nn.Module):
     def __init__(self):
         super().__init__()
-        self.conv = torch.nn.Conv2d(1, 3, 1, bias=False)
         self.net = torchvision.models.resnet34(pretrained=True)
         self.net.fc = torch.nn.Linear(512, 1, bias=True)
         self.eval()
+
+        self.transform = transforms.Compose([
+            transforms.RandomHorizontalFlip()
+        ])
     
     def forward(self, x):
-        return self.net(self.conv(x)).squeeze(1)
+        x = self.transform(x)
+        return self.net(x).squeeze(1)
     
     def save(self):
         torch.save(self.state_dict(), MODEL_STATE_PATH)
@@ -26,5 +30,4 @@ class Classifier(torch.nn.Module):
 
 if __name__ == "__main__":
     model = Classifier()
-    model.save()
     print(model)
