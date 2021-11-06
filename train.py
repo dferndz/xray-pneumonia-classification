@@ -3,7 +3,7 @@ import argparse
 from torchvision import transforms
 from tqdm.auto import tqdm
 import torch.utils.tensorboard as tb
-from utils import load_data
+from utils import load_data, dataset_factory
 from model import Classifier
 
 
@@ -12,9 +12,10 @@ def train(args):
     epochs = int(args.epochs)
     lr = float(args.lr)
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    dataset_class = dataset_factory[args.dataset]
     logger = tb.SummaryWriter(log_dir)
-    train_data = load_data("data/train")
-    valid_data = load_data("data/test")
+    train_data = load_data("data/train", dataset_class=dataset_class)
+    valid_data = load_data("data/test", dataset_class=dataset_class)
     model = Classifier()
     model.to(device)
     global_step = 0
@@ -63,6 +64,7 @@ if __name__ == "__main__":
     parser.add_argument("--log_dir", default="logs")
     parser.add_argument("-e", "--epochs", default=10)
     parser.add_argument("--lr", default=1e-3)
+    parser.add_argument("--dataset", "-d", default="xray")
 
     args = parser.parse_args()
     train(args)
