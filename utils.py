@@ -106,7 +106,6 @@ if __name__ == "__main__":
     data_train = load_data("data/train", dataset_class=dataset_factory[args.dataset])
 
     for x, y in data_train:
-        print(y)
         grid = torchvision.utils.make_grid(x[:8])
         plt.imshow(grid.permute(1,2,0))
         plt.show()

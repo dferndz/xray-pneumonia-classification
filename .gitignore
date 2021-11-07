@@ -139,7 +139,9 @@ cython_debug/
 
 # data
 data
-archive.*
+*.zip
+*.tar
+*.tar.xz
 
 # logs
 .log
