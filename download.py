@@ -5,5 +5,5 @@ DATASET_URL = "https://github.com/dferndz/xray-pneumonia-classification/releases
 LOCAL_FILE = "dataset.tar.xz"
 
 if __name__ == "__main__":
-    #urllib.request.urlretrieve(DATASET_URL, LOCAL_FILE)
+    urllib.request.urlretrieve(DATASET_URL, LOCAL_FILE)
     tarfile.open(LOCAL_FILE, "r:xz").extractall()
